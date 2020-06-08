@@ -7,7 +7,7 @@ import DarkFooter from "components/Footers/DarkFooter.js";
 
 // sections for this page
 import Tabs from "./index-sections/Tabs.js";
-import NucleoIcons from "./index-sections/NucleoIcons.js";
+import Cadastro from "./index-sections/Cadastro.js";
 
 function Index() {
   React.useEffect(() => {
@@ -28,7 +28,7 @@ function Index() {
         <IndexHeader />
         <div className="main">
           <Tabs />
-          <NucleoIcons />
+          <Cadastro />
         </div>
         <DarkFooter />
       </div>

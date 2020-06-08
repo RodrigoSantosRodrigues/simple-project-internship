@@ -4,7 +4,7 @@ import { Table, Container, Row, Col } from "reactstrap";
 
 import { TableStyle } from './styles';
 
-function NucleoIcons() {
+function Cadastro() {
   return (
     <>
       <div className="section section-nucleo-icons">
@@ -62,4 +62,4 @@ function NucleoIcons() {
   );
 }
 
-export default NucleoIcons;
+export default Cadastro;
