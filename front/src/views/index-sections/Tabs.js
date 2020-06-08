@@ -6,10 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // reactstrap components
 import {
+  Button, 
   Container,
   Row,
   Col
 } from "reactstrap";
+
+import { createUser } from '../api/register';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,14 +30,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 function Tabs() {
-  const [value, setValue] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [nascimento, setNasc] = React.useState("");
+  const [telefone, setTel] = React.useState("");
+  var [userValue, setUserValue] = React.useState("user");
+  var [passwordValue, setPasswordValue] = React.useState("");
   const classes = useStyles();
-
-  const handleChange = (value) =>{
-    setValue(value);
-  }
+  console.log(setUserValue);
 
   return (
     <>
@@ -52,8 +56,8 @@ function Tabs() {
                     <Input
                       style={{ color:'white'}}
                       id="standard-adornment-amount"
-                      value={value}
-                      onChange={e =>handleChange()}
+                      value={name}
+                      onChange={e => setName(e.target.value)}
                     />
                   </FormControl>
                   <FormControl  style={{ borderBottom: '2px solid rgba(255, 255, 255, 0.42)' }} fullWidth className={classes.margin}>
@@ -61,8 +65,8 @@ function Tabs() {
                     <Input
                       style={{ color:'white'}}
                       id="standard-adornment-amount"
-                      value={value}
-                      onChange={e =>handleChange()}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                     />
                   </FormControl>
                   <FormControl style={{ borderBottom: '2px solid rgba(255, 255, 255, 0.42)' }} fullWidth className={classes.margin}>
@@ -70,8 +74,8 @@ function Tabs() {
                     <Input
                       style={{ color:'white'}}
                       id="standard-adornment-amount"
-                      value={value}
-                      onChange={e =>handleChange()}
+                      value={nascimento}
+                      onChange={e => setNasc(e.target.value)}
                     />
                   </FormControl>
                   <FormControl style={{ borderBottom: '2px solid rgba(255, 255, 255, 0.42)' }} fullWidth className={classes.margin}>
@@ -79,11 +83,52 @@ function Tabs() {
                     <Input
                       style={{ color:'white'}}
                       id="standard-adornment-amount"
-                      value={value}
-                      onChange={e =>handleChange()}
+                      value={telefone}
+                      onChange={e => setTel(e.target.value)}
+                    />
+                  </FormControl>
+                  <FormControl style={{ borderBottom: '2px solid rgba(255, 255, 255, 0.42)' }} fullWidth className={classes.margin}>
+                    <InputLabel style={{ color:'white'}} htmlFor="standard-adornment-amount">Senha</InputLabel>
+                    <Input
+                      style={{ color:'white'}}
+                      id="standard-adornment-amount"
+                      value={passwordValue}
+                      onChange={e => setPasswordValue(e.target.value)}
                     />
                   </FormControl>
                 </div>
+                  <Button
+                    className="btn-neutral btn-round"
+                    color="info"
+                    href="#pablo"
+                    onClick={() =>
+                      createUser(
+                        name,
+                        email,
+                        passwordValue,
+                        userValue,
+                      )
+                      .then(response => {
+                        /*
+                        if (response === false){
+                          setAlertFailed(true);
+                        }
+
+                        if (response.status === 200){
+                          setAlertSucess(true);
+                          setNameValue("");
+                          setLoginValue("");
+                          setPasswordValue("");
+                          setUserValue("");
+                        }
+                        */
+                       console.log("Error")
+                      })
+                      .catch(console.error)}
+                    size="lg"
+                  >
+                    CADASTRAR 
+                  </Button>
               </form>
             </Col>
           </Row>

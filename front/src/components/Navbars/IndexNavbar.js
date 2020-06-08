@@ -16,6 +16,7 @@ import logo from "../../assets/img/imagens/logo-in8-dev.svg";
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
+  console.log(setNavbarColor);
   React.useEffect(() => {
     const updateNavbarColor = () => {
       if (
@@ -57,7 +58,7 @@ function IndexNavbar() {
               <img style={{ width: 100 }} alt="Logo" src={logo}/>
             </NavbarBrand>
             <UncontrolledTooltip target="#navbar-brand">
-              Welcome
+              Seja bem vindo!
             </UncontrolledTooltip>
             <button
               className="navbar-toggler navbar-toggler"
@@ -122,7 +123,7 @@ function IndexNavbar() {
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://twitter.com/CreativeTim?ref=creativetim"
+                  href="#"
                   target="_blank"
                   id="twitter-tooltip"
                 >
@@ -130,12 +131,12 @@ function IndexNavbar() {
                   <p className="d-lg-none d-xl-none">Twitter</p>
                 </NavLink>
                 <UncontrolledTooltip target="#twitter-tooltip">
-                  Follow us on Twitter
+                  Segue a gente no Twitter
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                  href="#"
                   target="_blank"
                   id="facebook-tooltip"
                 >
@@ -143,12 +144,12 @@ function IndexNavbar() {
                   <p className="d-lg-none d-xl-none">Facebook</p>
                 </NavLink>
                 <UncontrolledTooltip target="#facebook-tooltip">
-                  Like us on Facebook
+                  Nos curta no Facebook
                 </UncontrolledTooltip>
               </NavItem>
               <NavItem>
                 <NavLink
-                  href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                  href="#"
                   target="_blank"
                   id="instagram-tooltip"
                 >
@@ -156,7 +157,7 @@ function IndexNavbar() {
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
                 <UncontrolledTooltip target="#instagram-tooltip">
-                  Follow us on Instagram
+                  Estamos no Instagram
                 </UncontrolledTooltip>
               </NavItem>
             </Nav>
