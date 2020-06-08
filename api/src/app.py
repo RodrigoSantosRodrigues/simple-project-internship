@@ -11,6 +11,8 @@
 
 from flask import Flask, render_template
 
+from flask_cors import CORS
+
 from .config import app_config
 from .models import db, bcrypt
 
@@ -34,6 +36,8 @@ def create_app(env_name):
   
   # app initiliazation
   APP = Flask(__name__)
+
+  CORS(APP)
 
   APP.config.from_object(app_config[env_name])
 

@@ -104,7 +104,7 @@ def create():
 
 
 @user_api.route('/', methods=['GET'])
-@Auth.auth_required
+#@Auth.auth_required
 def get_all():
   """
 
@@ -127,6 +127,7 @@ def get_all():
         '401':
           description: Permission denied
   """
+  '''
   post_user= UserModel.get_one_user(g.user.get('id'))
   if not post_user:
     return custom_response({'error': 'user not found'}, 400)
@@ -134,6 +135,7 @@ def get_all():
 
   if data_user.get('role') != 'Admin':
     return custom_response({'error': 'permission denied'}, 401)
+  '''
 
   users = UserModel.get_all_users()
   ser_users = user_schema.dump(users, many=True)

@@ -2,20 +2,18 @@
 Database for applications
 
 ## Installation
-  - Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) or [Anaconda](https://www.anaconda.com/) and [Postgres](https://www.postgresql.org/) on your machine
+  - Install [Python](https://www.python.org/downloads/), [Pipenv](https://docs.pipenv.org/) and [Postgres](https://www.postgresql.org/) on your machine
 
-  - Activate the project virtual environment with `$ pipenv shell` command or `conda activate myenv`
-  - Install  `$ pipenv install` or Anaconda
-  - Developed in anaconda environment
+  - Install `pipenv` 
+  - Activate the project virtual environment with `$ pipenv shell` command 
   - `install -r requirements.txt` to install dependencies
-  - Export the required environment variables
-      ```
-      $ export FLASK_ENV=development
-      $ export DATABASE_URL=postgres://name:password@host:port/blog_api_db
-      $ export JWT_SECRET_KEY=hhgaghhgsdhdhdd
-      ```
+  - Rename .env.example for .env and configure
   - Start the app with `python run.py`
 
+## Migration
+  `python37 manage.py db init`
+  `python37 manage.py db migrate`
+  `python37 manage.py db upgrade`
 
 ## Compatibility
 * [Tested on Python 2.7 and 3.6, 3.7]
