@@ -1,0 +1,1603 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Service Database API",
+    "description": "Api rest to register users in a database for applications. Go to [Home page](http://localhost:5000/) for more information.",
+    "version": "1.0.0",
+    "termsOfService": "http://localhost:5000",
+    "contact": {
+      "email": "rodrjuniorsantos@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Primary server, e.g. Main (production) server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "APIKeyHeader": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "api-token"
+      }
+    }
+  },
+  "paths": {
+    "/v1/api/users/": {
+      "post": {
+        "summary": "Create a user Function. It will return the JWT token if the request was successful",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "description": "User Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password",
+                  "role",
+                  "deleted_app",
+                  "created_app",
+                  "modified_app"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Missing data"
+          },
+          "402": {
+            "description": "User already exist, please supply another email address"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all users Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all users"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/users/{user_id}": {
+      "get": {
+        "summary": "Gets a user by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The user ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this user successfully"
+          },
+          "400": {
+            "description": "user not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a user by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The user ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successfully deleted"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/users/{me}": {
+      "put": {
+        "summary": "Update-me.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "me",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The user ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "User Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password",
+                  "role",
+                  "deleted_app",
+                  "created_app",
+                  "modified_app"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "role": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully update"
+          },
+          "400": {
+            "description": "Not request"
+          },
+          "401": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Return your user data.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "me",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The user ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Access Token API to be used in Boleto Viewer"
+          }
+        }
+      },
+      "get": {
+        "summary": "Return your user data.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "User"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "me",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "The user ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An Access Token API to be used in Boleto Viewer"
+          },
+          "400": {
+            "description": "user in post not found"
+          }
+        }
+      }
+    },
+    "/v1/api/users/login": {
+      "post": {
+        "summary": "User Login Function In API, return a token API.",
+        "tags": [
+          "User"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An Access Token API to be used in Boleto Viewer"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Missing data"
+          },
+          "402": {
+            "description": "Missing credentiais"
+          },
+          "403": {
+            "description": "Email are not valid"
+          },
+          "404": {
+            "description": "Password are not valid"
+          }
+        }
+      }
+    },
+    "/v1/api/entities/": {
+      "post": {
+        "summary": "Create Profession Function.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity"
+        ],
+        "requestBody": {
+          "description": "Entity Functions",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "entity"
+                ],
+                "properties": {
+                  "entity": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "document": {
+                        "type": "string"
+                      },
+                      "deleted_app": {
+                        "type": "integer"
+                      },
+                      "created_app": {
+                        "type": "integer"
+                      },
+                      "modified_app": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "image": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entity successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Error in request image"
+          },
+          "402": {
+            "description": "Missing data"
+          },
+          "403": {
+            "description": "Document already exists for this user, please supply another document"
+          },
+          "404": {
+            "description": "There is already a registration for this user"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all entities Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all entities"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/entities/{entity_id}": {
+      "get": {
+        "summary": "Gets a entity by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The entity ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this entity successfully"
+          },
+          "400": {
+            "description": "user not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update A Entity.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The Entity ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Entity Functions",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "entity"
+                ],
+                "properties": {
+                  "entity": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "document": {
+                        "type": "string"
+                      },
+                      "deleted_app": {
+                        "type": "integer"
+                      },
+                      "created_app": {
+                        "type": "integer"
+                      },
+                      "modified_app": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "image": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entity successfully update"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Error in request image"
+          },
+          "402": {
+            "description": "Entity not found"
+          },
+          "403": {
+            "description": "Permission denied"
+          },
+          "404": {
+            "description": "Missing data"
+          },
+          "405": {
+            "description": "Document already exists for this user, please supply another document"
+          },
+          "406": {
+            "description": "There is already a registration for this user"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a entity by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entity_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The entity ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entity successfully deleted"
+          },
+          "400": {
+            "description": "Entity not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/profiles/": {
+      "post": {
+        "summary": "Create Profile Function.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Profile"
+        ],
+        "requestBody": {
+          "description": "Profile Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "career",
+                  "birthDate",
+                  "sex",
+                  "telephone"
+                ],
+                "properties": {
+                  "career": {
+                    "type": "string"
+                  },
+                  "birthDate": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "married": {
+                    "type": "boolean"
+                  },
+                  "cpf": {
+                    "type": "integer"
+                  },
+                  "rg": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Account in post not found"
+          },
+          "402": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all profiles Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all profiles"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/profiles/{profile_id}": {
+      "get": {
+        "summary": "Gets a profile by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Profile"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The profile ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this profile successfully"
+          },
+          "400": {
+            "description": "user not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update A Profile.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Profile"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The user ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Profile Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "career",
+                  "birthDate",
+                  "sex",
+                  "telephone"
+                ],
+                "properties": {
+                  "career": {
+                    "type": "string"
+                  },
+                  "birthDate": {
+                    "type": "string"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "telephone": {
+                    "type": "string"
+                  },
+                  "married": {
+                    "type": "boolean"
+                  },
+                  "cpf": {
+                    "type": "integer"
+                  },
+                  "rg": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile successfully update"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Not found"
+          },
+          "402": {
+            "description": "Permission denied"
+          },
+          "403": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a profile by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Profile"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The profile ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile successfully deleted"
+          },
+          "400": {
+            "description": "Profile not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/addresss/": {
+      "post": {
+        "summary": "Create Adress Function.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Address"
+        ],
+        "requestBody": {
+          "description": "Adress Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "street",
+                  "city",
+                  "zipCode",
+                  "state",
+                  "number"
+                ],
+                "properties": {
+                  "street": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "integer"
+                  },
+                  "zipCode": {
+                    "type": "integer"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "number": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Adress successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Entity Error"
+          },
+          "402": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all address Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Address"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all address"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/addresss/{address_id}": {
+      "get": {
+        "summary": "Gets a address by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Address"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "address_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The address ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this address successfully"
+          },
+          "400": {
+            "description": "user not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update A Address.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Address"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "address_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The Address ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Adress Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "street",
+                  "city",
+                  "zipCode",
+                  "state",
+                  "number"
+                ],
+                "properties": {
+                  "street": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "integer"
+                  },
+                  "zipCode": {
+                    "type": "integer"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "number": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Address successfully update"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Address not found"
+          },
+          "402": {
+            "description": "Permission denied"
+          },
+          "403": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a address by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Address"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "address_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The address ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Address successfully deleted"
+          },
+          "400": {
+            "description": "Address not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/apps/": {
+      "post": {
+        "summary": "Create App Function.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "App"
+        ],
+        "requestBody": {
+          "description": "App Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "description"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "App successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all apps Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "App"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all apps"
+          },
+          "400": {
+            "description": "User not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/apps/{app_id}": {
+      "get": {
+        "summary": "Gets a app by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The app ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this app successfully"
+          },
+          "400": {
+            "description": "user not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update A Profesion.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The app ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "App Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "description"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profesion successfully update"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "App not found"
+          },
+          "402": {
+            "description": "Permission denied"
+          },
+          "403": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a app by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The app ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "App successfully deleted"
+          },
+          "400": {
+            "description": "App not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/entityApps/": {
+      "post": {
+        "summary": "Create entityapps Function.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity App"
+        ],
+        "requestBody": {
+          "description": "entityapps Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "entity_id",
+                  "app_id"
+                ],
+                "properties": {
+                  "entity_id": {
+                    "type": "integer"
+                  },
+                  "app_id": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entityapps successfully registered"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all entityApps Function",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity App"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns all entityApps"
+          },
+          "400": {
+            "description": "Entityapps not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/v1/api/entityApps/{entityApp_id}": {
+      "get": {
+        "summary": "Gets a entityapps by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entityApp_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The entityapps ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data this entityapps successfully"
+          },
+          "400": {
+            "description": "Entityapps not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update A entityApps.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entityApp_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The entityapps ID."
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "App Functions",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "entity_id",
+                  "app_id"
+                ],
+                "properties": {
+                  "entity_id": {
+                    "type": "integer"
+                  },
+                  "app_id": {
+                    "type": "integer"
+                  },
+                  "deleted_app": {
+                    "type": "integer"
+                  },
+                  "created_app": {
+                    "type": "integer"
+                  },
+                  "modified_app": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entityapps successfully update"
+          },
+          "400": {
+            "description": "Error in request"
+          },
+          "401": {
+            "description": "Entityapps not found"
+          },
+          "402": {
+            "description": "Permission denied"
+          },
+          "403": {
+            "description": "Missing data"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a entityapps by ID.",
+        "security": [
+          {
+            "APIKeyHeader": []
+          }
+        ],
+        "tags": [
+          "Entity App"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entityApp_id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "The entityapps ID."
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entityapps successfully deleted"
+          },
+          "400": {
+            "description": "Entityapps not found"
+          },
+          "401": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "User Login"
+    },
+    {
+      "name": "Entity",
+      "description": "Access to Entity"
+    },
+    {
+      "name": "Address",
+      "description": "Address Functions"
+    },
+    {
+      "name": "Profile",
+      "description": "Profile Functions"
+    },
+    {
+      "name": "App",
+      "description": "App Fuctions"
+    },
+    {
+      "name": "Entity App",
+      "description": "EntityApp Fuctions"
+    }
+  ]
+}
