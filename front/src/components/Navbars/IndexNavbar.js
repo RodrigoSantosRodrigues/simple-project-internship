@@ -36,6 +36,9 @@ function IndexNavbar() {
       window.removeEventListener("scroll", updateNavbarColor);
     };
   });
+  const menuStyle = {
+    color: "white",
+  };
   return (
     <>
       {collapseOpen ? (
@@ -55,7 +58,7 @@ function IndexNavbar() {
               target="_blank"
               id="navbar-brand"
             >
-              <img style={{ width: 100 }} alt="Logo" src={logo}/>
+              <img style={{ width: 120 }} alt="Logo" src={logo}/>
             </NavbarBrand>
             <UncontrolledTooltip target="#navbar-brand">
               Seja bem vindo!
@@ -85,12 +88,9 @@ function IndexNavbar() {
                   href="#pablo"
                   onClick={e => {
                     e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
                   }}
                 >
-                  <p>Cadastro</p>
+                  <p style={menuStyle}>Cadastro</p>
                   <img style={{ paddingLeft:15, height: 7 }} alt="marker" src="https://img.icons8.com/emoji/48/000000/white-circle-emoji.png"/>
                 </NavLink>
               </NavItem>
@@ -99,12 +99,9 @@ function IndexNavbar() {
                   href="#pablo"
                   onClick={e => {
                     e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
                   }}
                 >
-                  <p>Lista</p>
+                  <p style={menuStyle}>Lista</p>
                   <img style={{ paddingLeft:15, height: 7 }} alt="marker" src="https://img.icons8.com/emoji/48/000000/white-circle-emoji.png"/>
                 </NavLink>
               </NavItem>
@@ -113,12 +110,9 @@ function IndexNavbar() {
                   href="#pablo"
                   onClick={e => {
                     e.preventDefault();
-                    document
-                      .getElementById("download-section")
-                      .scrollIntoView();
                   }}
                 >
-                  <p>Sobre mim</p>
+                  <p style={menuStyle} >Sobre mim</p>
                 </NavLink>
               </NavItem>
               <NavItem>

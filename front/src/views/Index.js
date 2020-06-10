@@ -6,8 +6,8 @@ import IndexHeader from "components/Headers/IndexHeader.js";
 import DarkFooter from "components/Footers/DarkFooter.js";
 
 // sections for this page
-import Tabs from "./index-sections/Tabs.js";
 import Cadastro from "./index-sections/Cadastro.js";
+import CadastroLista from "./index-sections/CadastroLista.js";
 
 function Index() {
   React.useEffect(() => {
@@ -27,8 +27,8 @@ function Index() {
       <div className="wrapper">
         <IndexHeader />
         <div className="main">
-          <Tabs />
           <Cadastro />
+          <CadastroLista />
         </div>
         <DarkFooter />
       </div>

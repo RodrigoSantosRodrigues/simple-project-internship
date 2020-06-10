@@ -24,7 +24,6 @@ function IndexHeader() {
   
   const estagioStyle = {
     color: "white",
-    fontFamily: "Helvetica 25 UltraLight Regular",
     textAlign: 'left',
     paddingTop: 150
   };
