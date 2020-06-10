@@ -21,8 +21,16 @@ function IndexHeader() {
       };
     }
   });
+  
+  const estagioStyle = {
+    color: "white",
+    fontFamily: "Helvetica 25 UltraLight Regular",
+    textAlign: 'left',
+    paddingTop: 150
+  };
 
   return (
+    
     <>
       <div className="page-header" filter-color="blue">
         <div
@@ -33,9 +41,9 @@ function IndexHeader() {
           ref={pageHeader}
         ></div>
         <Container>
-          <div style={{ textAlign: 'left'}} className="content-center brand">
-            <h1 className="h1-seo">ESTÁGIO</h1>
-            <h3>PROVA DE SELEÇÃO</h3>
+          <div style={estagioStyle} className="content-left brand">
+            <h4 style={{ fontSize: 90 }} className="h1-seo">ESTÁGIO</h4>
+            <h3 className="h1-seo">PROVA DE SELEÇÃO</h3>
           </div>
         </Container>
       </div>
